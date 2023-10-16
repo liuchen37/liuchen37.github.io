@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    td {
+      cursor: pointer;
+    }
+
+    .reserved {
+      background-color: #ff0000; /* Red color for reserved cells */
+    }
+  </style>
+</head>
+<body>
+  <div id="reservationTable"></div>
+
+  <script>
+    // Create the table structure
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const users = ["Randy", "Boboji", "Hesy"];
+
+    const table = document.createElement('table');
+    const headerRow = table.insertRow();
+    headerRow.insertCell().textContent = 'Day';
+    users.forEach(user => {
+      headerRow.insertCell().textContent = user;
+    });
+
+    days.forEach(day => {
+      const row = table.insertRow();
+      row.insertCell().textContent = day;
+      users.forEach(() => {
+        const cell = row.insertCell();
+        cell.className = 'reservable';
+        cell.addEventListener('click', () => {
+          if (cell.classList.contains('reserved')) {
+            cell.classList.remove('reserved');
+          } else {
+            cell.classList.add('reserved');
+          }
+        });
+      });
+    });
+
+    // Append the table to the HTML document
+    document.getElementById('reservationTable').appendChild(table);
+  </script>
+</body>
+</html>
